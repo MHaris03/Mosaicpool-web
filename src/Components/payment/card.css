@@ -1,0 +1,78 @@
+form{
+ margin-top: 62px;
+}
+  
+#card__name{
+ margin-left: -220px;
+}
+.cardnumber{
+	border-radius: 7px;
+	padding: 5px 15px;
+	border: 1px solid #e5e7eb;
+	width: 347px;
+}
+.pay__btn{
+    outline: none;
+    border: none;
+    justify-content: center;
+    letter-spacing: .5px;
+	padding: 10px 20px;
+	border-radius: 20px;
+	cursor: pointer;
+    color: white;
+    margin-top: 20px;
+    background-color: #183f9c;
+	width: 347px;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+#cvc__number{
+	width: 173px;
+	border: 1px solid #e5e7eb;
+	outline: none;
+	border-radius: 7px;
+	padding: 5px 15px;
+	border-top: none;
+	border-bottom: none;
+}
+#year__number{
+	width: 173px;
+	border: 1px solid #e5e7eb;
+	outline: none;
+	border-radius: 7px;
+	border-top: none;
+	border-bottom: none;
+	border-left: none;
+	padding: 5px 15px;
+}
+.confirm__btn{
+	text-align: center;
+}
+.Test__mode{
+	color: red;
+	margin-top: 3px;
+}
+.carddiv{
+	width: 347px;
+	border:1px #e5e7eb solid;
+	display: flex;
+	border-radius: 7px;
+	padding: 5px 15px;
+	text-align: center;
+}
+.card__number{
+	border: none;
+}
+.visaimg{
+	width: 30px;
+	height: 30px;
+    margin-left: -63px;
+	
+}
+/* input[type=text]:focus {
+	border: 1px solid skyblue;
+	
+  }
+  input[type=text] {
+	padding: 5px 15px;
+  } */

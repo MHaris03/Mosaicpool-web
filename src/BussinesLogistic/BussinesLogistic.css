@@ -1,0 +1,37 @@
+#slider__Image{
+    margin: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+/* .carousel span{
+    padding: 30px;
+    color: #2F3543;
+    background-color: #2F3543;
+} */
+#slider-btn{
+    background: #0a2970;
+    height: 50px;
+    width: 50px;
+    margin: auto !important;
+    font-size: 10px;
+    display: block;
+    color: #fff;
+	border-radius: 5px;
+	line-height: 63px;
+	text-align: center;
+    transition: all .3s ease-in-out;
+}
+
+.slides-navigation a {
+	background: #0b2153;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+    display: block;
+    color: #fff;
+	border-radius: 4px;
+	line-height: 63px;
+	text-align: center;
+    transition: all .3s ease-in-out;
+}

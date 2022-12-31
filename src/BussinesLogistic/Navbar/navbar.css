@@ -1,0 +1,37 @@
+.navbar{
+    max-height: 150px;
+    background: transparent;
+    background-image: url(/Uploads/back.png);
+}
+#Logo_web{
+    height: 250px;
+    margin-top: -60px;
+}
+.navbar{
+    display: block;
+    justify-content: center;
+    justify-items: center;
+}
+.navbar .nav-item{
+    color: rgb(0, 0, 0);
+}
+#item_lang{
+    color:white;
+    margin: auto;
+}
+option{
+    color: #ffffff;
+}
+select{
+    border: none;
+    color: #ffffff;
+}
+@media (max-width: 900px) {
+    .navbar{
+        max-height: 400px;
+    }
+    #Logo_web {
+        height: 150px;
+        margin-top: -75px !important;
+    }
+}
