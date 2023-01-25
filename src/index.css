@@ -21,3 +21,9 @@ a{
 .down-content p{
   font-size: 14px;
 }
+.avatar{
+  object-fit: cover;
+}
+#model{
+  width: 140% !important;
+}
