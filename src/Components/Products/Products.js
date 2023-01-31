@@ -15,6 +15,9 @@ const Products = (props) => {
     const [Descrimdl, setDescrimdl] = useState()
     const [Pricemdl, setPricemdl] = useState()
     const [mdlname, setmdlname] = useState()
+    const [multipleimg, setmultipleimg] = useState([])
+    // const token = isAutheticated() && isAutheticated().token;
+
     useEffect(() => {
 
         async function fetchUserAPI() {
@@ -33,6 +36,8 @@ const Products = (props) => {
         setDescrimdl(event.descriptions)
         setPricemdl(event.Price)
         setmdlname(event.name)
+        setmultipleimg(event.ImageArray)
+
     }
     const AddDatanew = (Array,) => {
         Array.item = 1;
@@ -67,6 +72,8 @@ const Products = (props) => {
                                     </div>
                                     <br />
                                     <br />
+                                    {productlist.length == 0 && <h3>No Products Available</h3>}
+
                                     {productlist.map(ls => (
                                         <div class="col-md-4" key={ls.id}>
                                             <div class="product-item">
@@ -74,6 +81,7 @@ const Products = (props) => {
                                                     data-toggle="modal" data-target="#exampleModal"
                                                     alt="product image" style={{ height: '20em', cursor: 'pointer' }} onClick={() => handleClick(ls)} />
                                                 <div class="down-content text-right">
+                                                    {/* {console.log(ls.ImageArray, "image array")} */}
                                                     <a href="#"><h4>{ls.nameofproduct}</h4>{ls.name}</a>
                                                     <h6 style={{ color: "#091846" }}>{ls.priceofproduct} {t("SAR")}.{ls.Price}</h6>
                                                     <p style={{ color: "#1c47d5" }}>{ls.discriptionproduct}{ls.descriptions}</p>
@@ -94,7 +102,9 @@ const Products = (props) => {
                                                     >{t("اضف الى السلة")}</button>
                                                 </div>
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
+
+                                                    <div class="modal-dialog" role="document"
+                                                    >
                                                         <div class="modal-content" id='model'>
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">انظر التفاصيل</h5>
@@ -103,17 +113,50 @@ const Products = (props) => {
                                                                 </button>
                                                             </div>
                                                             <p>
-                                                                    {/* <b>Picture:</b> */}
-                                                                    <div class="modal-body" style={{ textAlign: "center" }}>
-                                                                        <img
-                                                                            
-                                                                            src={Imagemdl}
-                                                                            alt="image"
-                                                                            className="avatar"
-                                                                            
-                                                                        />
+
+                                                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                                                    <div class="carousel-inner">
+                                                                        {/* <div class="carousel-item active">
+                                                                            <img class="d-block w-100" src={multipleimg} alt="First slide" />
+                                                                        </div> */}
+                                                                        {/* {
+                                                                            console.log("thiis is ls image array", ls.ImageArray)} */}
+
+                                                                        {multipleimg.map((img) => (
+                                                                            <div class="carousel-item active">
+                                                                                <img class="d-block w-100" src={img} alt="" />
+                                                                                {/* { console.log(img,"first img")} */}
+
+                                                                            </div>))}
+
+                                                                        {/* { multipleimg.map((img,index)=>((
+                                                                                <div class="carousel-item active"key={index}>
+                                                                                    <img class="d-block w-100" src={img} alt="First slide" />
+                                                                                </div>
+                                                                                
+                                                                            )))} */}
+
                                                                     </div>
-                                                                </p>
+                                                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                        <span class="sr-only">Previous</span>
+                                                                    </a>
+                                                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                        <span class="sr-only">Next</span>
+                                                                    </a>
+                                                                </div>
+                                                                {/* <b>Picture:</b> */}
+                                                                <div class="modal-body" style={{ textAlign: "center" }}>
+                                                                    <img
+
+                                                                        src={Imagemdl}
+                                                                        alt="image"
+                                                                        className="avatar"
+
+                                                                    />
+                                                                </div>
+                                                            </p>
                                                             <div class="modal-body" style={{ textAlign: "left" }}>
                                                                 <h6>
                                                                     <b>اسم:</b>
@@ -127,7 +170,7 @@ const Products = (props) => {
                                                                     <b>الأوصاف:</b>
                                                                     {Descrimdl}
                                                                 </h6>
-                                                              
+
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
