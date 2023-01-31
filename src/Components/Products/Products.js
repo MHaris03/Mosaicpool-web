@@ -5,7 +5,8 @@ import { AddDataFunction } from '../../Action/action';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next'
 import { onSnapshot, collection, query, } from "firebase/firestore";
-import db from "../../db";
+import db from "../../db"
+import Carousel from 'react-bootstrap/Carousel'
 import LoadingSpin from "react-loading-spin";
 const Products = (props) => {
     const { t } = useTranslation(["sidebar"]);
@@ -72,7 +73,7 @@ const Products = (props) => {
                                     </div>
                                     <br />
                                     <br />
-                                    {productlist.length == 0 && <h3>No Products Available</h3>}
+                                    {productlist.length == 0 && <h3 id='Noproducts'>لا توجد منتجات متاحة</h3>}
 
                                     {productlist.map(ls => (
                                         <div class="col-md-4" key={ls.id}>
@@ -103,8 +104,7 @@ const Products = (props) => {
                                                 </div>
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                                                    <div class="modal-dialog" role="document"
-                                                    >
+                                                    <div class="modal-dialog" role="document">
                                                         <div class="modal-content" id='model'>
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">انظر التفاصيل</h5>
@@ -113,28 +113,41 @@ const Products = (props) => {
                                                                 </button>
                                                             </div>
                                                             <p>
+                                                                
+                                                                <Carousel fade>
+                                                                    {
+                                                                        multipleimg.map((img) => (
+                                                                            <Carousel.Item>
+                                                                                <img
+                                                                                    className='d-block w-100'
+                                                                                    src={img}
+                                                                                    alt="First slide"
+                                                                                />
+                                                                            </Carousel.Item>
 
-                                                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                                                        ))}
+                                                                </Carousel>
+
+                                                                {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                                                     <div class="carousel-inner">
-                                                                        {/* <div class="carousel-item active">
+                                                                        <div class="carousel-item active">
                                                                             <img class="d-block w-100" src={multipleimg} alt="First slide" />
-                                                                        </div> */}
-                                                                        {/* {
-                                                                            console.log("thiis is ls image array", ls.ImageArray)} */}
+                                                                        </div>
+                                                                        
 
                                                                         {multipleimg.map((img) => (
                                                                             <div class="carousel-item active">
-                                                                                <img class="d-block w-100" src={img} alt="" />
-                                                                                {/* { console.log(img,"first img")} */}
+                                                                                <img class="d-block w-100" src={img} alt="" key={img} />
+                                                                  
 
                                                                             </div>))}
 
-                                                                        {/* { multipleimg.map((img,index)=>((
+                                                                        { multipleimg.map((img,index)=>((
                                                                                 <div class="carousel-item active"key={index}>
                                                                                     <img class="d-block w-100" src={img} alt="First slide" />
                                                                                 </div>
                                                                                 
-                                                                            )))} */}
+                                                                            )))}
 
                                                                     </div>
                                                                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -145,7 +158,7 @@ const Products = (props) => {
                                                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                         <span class="sr-only">Next</span>
                                                                     </a>
-                                                                </div>
+                                                                </div> */}
                                                                 {/* <b>Picture:</b> */}
                                                                 <div class="modal-body" style={{ textAlign: "center" }}>
                                                                     <img
