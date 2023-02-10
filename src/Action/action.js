@@ -29,6 +29,7 @@ export const DecrimentDataFunction = Data => dispatch =>{
 }
 
 export const ClearDataFunction = Data => dispatch =>{
+    console.log(Data)
     dispatch({
         payload : Data,
         type : ClearData

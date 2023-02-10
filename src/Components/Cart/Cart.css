@@ -28,16 +28,12 @@
     cursor: pointer;
     color: white !important;
   }
-
-  .cart-icon i {
-    color: #E4B475 !important;
-  }
   .cart-icon p {
     position: absolute;
     width: 1.2rem !important;
     height: 1.2rem !important;
-    margin-right: -9px !important;
-    margin-top: -17px !important;
+    margin-left: 5px !important;
+    margin-top: 5px !important;
     border-radius: 50%;
     background: rgb(36, 33, 78);
     color: white;

@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next'
 import { onSnapshot, collection, query, } from "firebase/firestore";
 import db from "../../db"
-import Carousel from 'react-bootstrap/Carousel'
+import Carousel from 'react-bootstrap/Carousel';
 import LoadingSpin from "react-loading-spin";
+import './product.css';
 const Products = (props) => {
     const { t } = useTranslation(["sidebar"]);
     const [Loader, setLoader] = useState(false)
@@ -17,21 +18,51 @@ const Products = (props) => {
     const [Pricemdl, setPricemdl] = useState()
     const [mdlname, setmdlname] = useState()
     const [multipleimg, setmultipleimg] = useState([])
-    // const token = isAutheticated() && isAutheticated().token;
+    const [searched, setSearched] = useState([]);
+    const [Array, setArray] = React.useState([]);
 
+    const requestSearch = (text) => {
+        // console.log("searchedVal", text.target.value)
+        // console.log("ArrayArray", Array)
+        // const filteredRows = Array.filter((row) => {
+        //     console.log("rowrowrow", row)
+        //     return row.name.toLowerCase().includes(searchedVal.target.value.toLowerCase());
+        // });
+        // console.log("filteredRows", filteredRows)
+        // setArray(...filteredRows);
+        if (text.target.value === '') {
+            setproductlist(Array);
+        }
+        if (text.target.value) {
+            const newData = productlist.filter(function (item) {
+                const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
+                const textData = text.target.value.toUpperCase();
+                return itemData.indexOf(textData) > -1;
+            });
+
+            console.log("newDatanewDatanewDatanewData", newData)
+            setproductlist(newData);
+            // setSearched(text.target.value);
+        }
+
+    };
+
+    const handleChange = (text) => {
+        setproductlist(text.target.value);
+    };
     useEffect(() => {
 
         async function fetchUserAPI() {
             const q = query(collection(db, "Products"));
             const unsub = onSnapshot(q, (querySnapshot) => {
                 setproductlist(querySnapshot.docs.map((d) => d.data()));
-                // console.log(querySnapshot.docs.length,"this is order length")
+                setArray(querySnapshot.docs.map((d) => d.data()))
                 setLoader(true)
             });
         }
 
         fetchUserAPI();
-    }, []);
+    }, [searched]);
     const handleClick = (event) => {
         setImagemdl(event.Image)
         setDescrimdl(event.descriptions)
@@ -63,11 +94,25 @@ const Products = (props) => {
                     :
                     <React.Fragment>
                         <div class="latest-products">
+
+                            <div class="row height d-flex justify-content-center align-items-center">
+
+                                <div class="col-md-6">
+
+                                    <div class="form">
+                                        <input class="form-control" type="text" placeholder="Search By Tiles Name..."
+                                            onChange={(searchVal) => requestSearch(searchVal)}
+                                            onhandleChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <Heading text={t("Latest Products")} />
+                                        <LabelText text={t("Our Products")} />
                                     </div>
+
                                     <div className="col-md-6">
                                         <LabelText text={t("View all products")} float="right" />
                                     </div>
@@ -84,19 +129,19 @@ const Products = (props) => {
                                                 <div class="down-content text-right">
                                                     {/* {console.log(ls.ImageArray, "image array")} */}
                                                     <a href="#"><h4>{ls.nameofproduct}</h4>{ls.name}</a>
-                                                    <h6 style={{ color: "#091846" }}>{ls.priceofproduct} {t("SAR")}.{ls.Price}</h6>
-                                                    <p style={{ color: "#1c47d5" }}>{ls.discriptionproduct}{ls.descriptions}</p>
+                                                    <h6 style={{ color: "#4FA8EF" }}>{ls.priceofproduct} {t("SAR")}.{ls.Price}</h6>
+                                                    <p style={{ color: "#111111" }}>{ls.discriptionproduct}{ls.descriptions}</p>
                                                     <ul class="stars text-left">
-                                                        <li><svg style={{ color: "#E4B475" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
-                                                        <li><svg style={{ color: "#E4B475" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
-                                                        <li><svg style={{ color: "#E4B475" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
-                                                        <li><svg style={{ color: "#E4B475" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
-                                                        <li><svg style={{ color: "#E4B475" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
+                                                        <li><svg style={{ color: "#FFA41D" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
+                                                        <li><svg style={{ color: "#FFA41D" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
+                                                        <li><svg style={{ color: "#FFA41D" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
+                                                        <li><svg style={{ color: "#FFA41D" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
+                                                        <li><svg style={{ color: "#FFA41D" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> </svg></li>
                                                     </ul>
-                                                    <span>{t("Star")} (5)</span>
+                                                    {/* <span>{t("Star")} (5)</span> */}
                                                 </div>
                                                 <div className="add__btn__setting">
-                                                    <button type="button" class="btn btn-outline-warning"
+                                                    <button type="button" class="btn btn-outline-primary"
                                                         onClick={() =>
                                                             AddDatanew(ls, ls.id,)
                                                         }
@@ -113,7 +158,7 @@ const Products = (props) => {
                                                                 </button>
                                                             </div>
                                                             <p>
-                                                                
+
                                                                 <Carousel fade>
                                                                     {
                                                                         multipleimg.map((img) => (
@@ -127,38 +172,6 @@ const Products = (props) => {
 
                                                                         ))}
                                                                 </Carousel>
-
-                                                                {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                                                    <div class="carousel-inner">
-                                                                        <div class="carousel-item active">
-                                                                            <img class="d-block w-100" src={multipleimg} alt="First slide" />
-                                                                        </div>
-                                                                        
-
-                                                                        {multipleimg.map((img) => (
-                                                                            <div class="carousel-item active">
-                                                                                <img class="d-block w-100" src={img} alt="" key={img} />
-                                                                  
-
-                                                                            </div>))}
-
-                                                                        { multipleimg.map((img,index)=>((
-                                                                                <div class="carousel-item active"key={index}>
-                                                                                    <img class="d-block w-100" src={img} alt="First slide" />
-                                                                                </div>
-                                                                                
-                                                                            )))}
-
-                                                                    </div>
-                                                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                        <span class="sr-only">Previous</span>
-                                                                    </a>
-                                                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                        <span class="sr-only">Next</span>
-                                                                    </a>
-                                                                </div> */}
                                                                 {/* <b>Picture:</b> */}
                                                                 <div class="modal-body" style={{ textAlign: "center" }}>
                                                                     <img

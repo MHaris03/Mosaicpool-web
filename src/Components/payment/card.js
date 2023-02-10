@@ -1,188 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import Navbar from '../../BussinesLogistic/Navbar/Navbar';
-// import Footer from '../Footer/Footer';
-// import { useLocation } from 'react-router';
-// import { useTranslation } from 'react-i18next'
-
-// import db from "../../db";
-// import {collection,addDoc} from "firebase/firestore";
-
-// import './card.css';
-// const Card = () => {
-//     const { t } = useTranslation(["sidebar"]);
-//     const [totalprice, settotalprice] = useState(0);
-//     const location = useLocation()
-//     const [ProductName, setProductName] = useState('');
-//     const [TilesMeters, setTilesMeters] = useState('');
-//     const [cvc, setCvc] = useState('');
-//     const [Description, setDescriptions] = useState('');
-//     const [ProductImage, setProductImage] = useState('');
-//     const [name, setName] = useState('');
-//     const [number, setNumber] = useState('');
-//     const [year, setYear] = useState('');
-//     const [month, setMonth] = useState('');
-//     const [Date, setDate] = useState('');
-//     const [Address, setAddress] = useState('');
-//     const [Phonenumber, setPhonenumber] = useState('');
-//     const [State, setState] = useState('');
-//     const [Email, setEmail] = useState('');
-//     const productlist = JSON.parse(localStorage.getItem('productlist'))
-//     useEffect(async() => {
-//         setDate(localStorage.getItem("Date"))
-//         setAddress(localStorage.getItem("Address"))
-//         setPhonenumber(localStorage.getItem("Phone"))
-//         setState(localStorage.getItem("State"))
-//         setEmail(localStorage.getItem("Email")) 
-
-//          if(productlist.totalprice>0){
-//             const script = document.createElement('script');
-//             script.type='text/javascript';
-//             script.async=true;
-//             script.innerHTML=`Moyasar.init({element: '.mysr-form',amount: ${100*productlist.totalprice},
-//             currency: 'SAR',description: '${productlist.item} Meters',publishable_api_key: 
-//             'pk_test_TU9tqAAwVmfPeVJmhevtf6DBiqkqXeEHJgSCr2aq',callback_url:'http://localhost:3000/ConfirmOrder',methods: ['creditcard',],});`
-
-//             const script1= document.createElement('script');
-//             script1.src="https://polyfill.io/v3/polyfill.min.js?features=fetch"
-//             script1.async=true;
-
-//             const script2=document.createElement('script');
-//             script2.src="https://cdn.moyasar.com/mpf/1.7.3/moyasar.js"
-//             script2.async=true;
-
-//             document.body.appendChild(script1)
-//             document.body.appendChild(script2)
-//             document.body.appendChild(script)
-//             console.log("list if else condition",productlist.name,productlist.totalprice,Phonenumber)
-
-//         }
-//             console.log("list else condition",productlist.name)
-//             const docRef = await addDoc(collection(db, "Weborder"), {
-//                 ProductName: productlist.name,
-//                 ProductPrice: productlist.totalprice,
-//                 UserName: name,
-//                 productid: Math.random().toString(32).substring(1, 18),
-//                 TilesMeters: productlist.item,
-//                 Date: Date,
-//                 Address: Address,
-//                 State: State,
-//                 Email: Email,
-//                 Phonenumber: setPhonenumber(localStorage.getItem("Phone"))
-//             })
-//             console.log(docRef,"data that is store in the firebase...")
-//         }, [productlist.totalprice])
-
-
-//     // const procedurepayment = () => {
-//     //     console.log("this is location",totalprice,Description,TilesMeters,ProductName,ProductImage)
-
-//     //    var myHeaders = new Headers();
-//     //     myHeaders.append("Authorization", "Bearer sk_test_2iWhAm8Q6DmQ3tbRPVBv9Fysr5QaLd1cZxyDhUWo");
-
-//     //     var formdata = new FormData();
-//     //     formdata.append("publishable_api_key", "pk_test_TU9tqAAwVmfPeVJmhevtf6DBiqkqXeEHJgSCr2aq");
-//     //     formdata.append("callback_url", "http://localhost:3000/ConfirmOrder");
-//     //     // formdata.append("callback_url", "https://mosiacpools.online/ConfirmOrder");
-//     //     formdata.append("amount", 100 * totalprice);
-//     //     formdata.append("currency", "SAR");
-//     //     formdata.append("source[type]", "creditcard");
-//     //     formdata.append("source[name]", name);
-//     //     formdata.append("source[number]", number);
-//     //     // formdata.append("source[descriptions]", TilesMeters);
-//     //     formdata.append("source[cvc]", cvc);
-//     //     formdata.append("source[month]", month);
-//     //     formdata.append("source[year]", year);
-
-//     //     var requestOptions = {
-//     //         method: 'POST',
-//     //         headers: myHeaders,
-//     //         body: formdata,
-//     //         redirect: 'follow'
-//     //     };
-
-
-
-//     //     fetch("https://api.moyasar.com/v1/payments", requestOptions)
-//     //         .then(response => response.json())
-//     //         .then(result => {
-//     //             if (result.type === "invalid_request_error") {
-//     //                 alert(result.message)
-//     //             }
-//     //             else {
-//     //                 window.open(result.source.transaction_url, "_blank");
-
-//     //                 const docRef = addDoc(collection(db, "Weborder"), {
-//     //                     ProductName: ProductName,
-//     //                     ProductPrice: totalprice,
-//     //                     UserName: name,
-//     //                     productid: Math.random().toString(32).substring(1, 18),
-//     //                     TilesMeters: TilesMeters,
-//     //                 });
-//     //                 setNumber('');
-//     //                 setCvc('');
-//     //                 setName('');
-//     //                 setYear('');
-//     //                 setMonth('');
-//     //                 settotalprice('')
-//     //             }
-
-
-//     //         })
-
-
-//     // }
-
-//     return (
-//         <React.Fragment>
-//             <Navbar />
-//             <div class="mysr-form"></div>
-//         {/* <center>        
-//            <form>
-//             <label id='card__name'>Name on card</label><br/>
-//             <input placeholder='Name on card' type='text' className='cardnumber'/><br/><br/>
-//             <div>
-//             <label id='card__name'>Card Information</label><br/>
-//             <input placeholder='1234512345678912'type='text'className='cardnumber'
-//             onChange={event=>setNumber(event.target.value)}
-
-//             />
-//             <div>
-//                 <input placeholder='Month' type='text'id='cvc__number'
-//                 onChange={event=>setMonth(event.target.value)}
-
-//                 />
-//                 <input placeholder='Year' type='text' id='cvc__number'
-//                 onChange={event=>setYear(event.target.value)}
-
-//                 /><br/>
-//                  <input placeholder='CVC' type='text' className='cardnumber'
-//                 onChange={event=>setCvc(event.target.value)}
-
-//                 />
-//             </div>
-//             </div>
-//             <div className='confirm__btn'>
-
-//                 <button className='pay__btn' onClick={procedurepayment} type='button'>Pay SAR.{totalprice}
-
-//                 </button>
-
-//             </div>
-//            </form>
-//            </center> */}
-
-//             <Footer />
-//         </React.Fragment>
-//     )
-// }
-
-// export default Card;
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../BussinesLogistic/Navbar/Navbar';
 import Footer from '../Footer/Footer';
@@ -207,6 +22,8 @@ const Card = () => {
     const [Phonenumber, setPhonenumber] = useState();
     const [State, setState] = useState();
     const [Email, setEmail] = useState();
+    const [Shipped, setShipped] = useState(false);
+    const Invoiceid = Math.floor(Math.random() * 100000000 );
     const productlist = JSON.parse(localStorage.getItem('productlist'))
 
     useEffect(() => {
@@ -223,9 +40,14 @@ const Card = () => {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer sk_live_QGkw36uaqKQBeUE7tTUuUbE1go7U8mjHyT79pq74");
 
+        // myHeaders.append("Authorization", "Bearer sk_test_2iWhAm8Q6DmQ3tbRPVBv9Fysr5QaLd1cZxyDhUWo");
+
         var formdata = new FormData();
         formdata.append("publishable_api_key", "pk_live_JWbhYrvcxPff3zXujdZM77wutoFetCpz1dif3GTQ");
+
+        // formdata.append("publishable_api_key", "pk_test_TU9tqAAwVmfPeVJmhevtf6DBiqkqXeEHJgSCr2aq");
         formdata.append("callback_url", "https://mosiacpools.online/ConfirmOrder");
+        // formdata.append("callback_url", "http://localhost:3000/ConfirmOrder");
         formdata.append("amount", 100 * productlist.totalprice);
         formdata.append("currency", "SAR");
         formdata.append("description", productlist.item);
@@ -249,6 +71,7 @@ const Card = () => {
             .then(result => {
                 if (result.type === "invalid_request_error") {
                     alert(result.message)
+                    {console.log(result,"Invalid")}
                 }
                 else {
                     window.open(result.source.transaction_url, "_blank")
@@ -256,16 +79,17 @@ const Card = () => {
                         ProductName: productlist.name,
                         ProductPrice: productlist.totalprice,
                         UserName: name,
-                        productid: Math.random().toString(32).substring(1, 18),
+                        productid: Invoiceid,
                         TilesMeters: productlist.item,
                         Date: Date,
                         Address: Address,
                         State: State,
                         Email: Email,
                         Phonenumber: Phonenumber,
+                        Shipped:Shipped,
 
                     });
-
+                    localStorage.setItem("Invoiceid", JSON.stringify(Invoiceid))
 
                     setNumber('');
                     setcvc('');
@@ -273,7 +97,7 @@ const Card = () => {
                     setmonth('');
                     setyear('');
                     settotalprice('');
-
+                    setShipped(false);
                 }
 
 

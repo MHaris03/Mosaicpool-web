@@ -1,8 +1,9 @@
 import React from 'react';
 import './Home.css';
 import Navbar from '../../BussinesLogistic/Navbar/Navbar'; 
-import Slider from '../../BussinesLogistic/Slider/Slider';
+import Content from '../../BussinesLogistic/Content/Content';
 import Products from '../Products/Products';
+
 import Footer from '../Footer/Footer';
 import Banner from '../../Images/banner2.png';
 //class Home extends Component {
@@ -14,7 +15,7 @@ import Banner from '../../Images/banner2.png';
             <React.Fragment>
                 <Navbar/>
                 
-                <Slider/>
+                <Content/>
                 <br></br>
                 <div style={{margin:"auto",textAlign:"center"}}>
                 <img    

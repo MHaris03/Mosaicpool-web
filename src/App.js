@@ -3,6 +3,7 @@ import store from "./Store/store";
 import { Provider } from "react-redux";
 import Routing from "./Routing/Routing";
 import { Suspense } from "react";
+// import Mainpage from './Components/Mainpage/Mainpage';
 import db from "./db";
 import {
   onSnapshot,

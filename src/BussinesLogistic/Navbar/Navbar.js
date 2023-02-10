@@ -1,5 +1,4 @@
-import React, {useEffect } from 'react';
-import ReactDOM from "react-dom";
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
@@ -7,8 +6,7 @@ import '../../Components/Cart/Cart';
 import { Link } from 'react-router-dom';
 import Logo from '../../Images/mosaic pool-05.png';
 import './navbar.css';
-//class Navbar extends Component {
-// render() 
+import Carttrolly from "../../Images/cartrrolley.svg"
 const Navbar = (props) => {
     const { i18n, t } = useTranslation(["sidebar"]);
 
@@ -23,120 +21,119 @@ const Navbar = (props) => {
     };
     return (
         <React.Fragment>
+            <div className='container-fluid top__bar'>
+                <div class="col-md-6 .offset-md-6 text-center text-sm-left mb-1 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="">+966 55 740 4034</a>
+                        <span class="text-white" id="mobilesettings">|</span>
+                        <a class="text-white pl-3" href="" id="mobilesettings">Save Up To 40% on First Buy !!</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-sm-right">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="https://www.snapchat.com/add/vip_mosaicpools?share_id=QzI4NDYw&locale=ar_SA@calendar=gregorian;numbers=latn" target="_blank">
+                            <i class="fab fa-snapchat"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://twitter.com/vip_mosaicpools?s=11&t=u-Lfg0RgX6i3NMzsdj-j0Q" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://www.instagram.com/vip_mosaicpools/?igshid=YmMyMTA2M2Y%3D" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg py-0" >
+                <div class="container-fluid">
+                    <div className='container'>
+                        <a class="navbar-brand" href="/"><img className='img-fluid' src={Logo} alt="logo" id="Logo_web" /></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <img class="navbar-toggler-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAFJJREFUSEtjZKAxYKSx+QyjFhAMYfoHkcaMN/8JOguPghsZIiiOxvABzS2gxPXY9NI/DmjuA5rHAc0toHkQDX0LaB4HNLdg6MfBqA/QQ4DmpSkAcbYYGW5ncyAAAAAASUVORK5CYII=" />
+                        </button>
 
-            <nav class="navbar navbar-expand-lg navbar-dark py-0" >
-                <div class="container">
-                    <a class="navbar-brand" href="/"><img className='img-fluid' src={Logo} alt="logo" id="Logo_web" /></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                        <ul class="navbar-nav ml-auto py-0">
-                        <li class="nav-item">
-                                <Link class="nav-link" to="/ContactUs">{t("اتصل بنا")}</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/Gallery">{t("اعمالنا")}</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/About">{t("من نحن")}</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/">{t("الرئيسية")}
-                                    <span class="sr-only">(current)</span>
-                                </Link>
-                            </li>
-                            {/* <li class="nav-item">
-                                <Link class="nav-link" to="/Components/Product">{t("المنتجات")}</Link>
-                            </li> */}
-                            
-                           
-                            {/* <div id='item_lang'>
-
-                                <select class="navbar navbar-expand-lg navbar-dark bg-dark"
-                                    value={localStorage.getItem("i18nextLng")}
-                                    onChange={handleLanguageChange}
-                                    id='languagebtn'
-                                >
-                                    <option value="en" >English</option>
-                                    <option value="ar" >Arabic</option>
-                                </select>
-                            </div> */}
-                            <l1>
-                                <Link to="/View/CartView">
-                                    <div className="cart-icon">
-                                    <svg style={{color: "#E4B475"}} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16"> 
-                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" fill="#dfa24e"></path> </svg>
-                                        <p>{props.Productlistlength.length}</p>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav ml-auto py-0">
+                                <li class="nav-item">
+                                    <Link class="nav-link" to="/ContactUs">{t("اتصل بنا")}</Link>
+                                </li>
+                                <li class="nav-item">
+                                    <Link class="nav-link" to="/Gallery">{t("اعمالنا")}</Link>
+                                </li>
+                                <li class="nav-item">
+                                    <Link class="nav-link" to="/About">{t("من نحن")}</Link>
+                                </li>
+                                <li class="nav-item">
+                                    <Link class="nav-link" to="/">{t("الرئيسية")}
+                                        <span class="sr-only">(current)</span>
+                                    </Link>
+                                </li>
+                                <div class="col-md-2">
+                                    <div class="d-flex d-none d-md-flex flex-row align-items-center">
+                                        <Link to="/View/CartView">
+                                            <div className="cart-icon">
+                                                <div className='menu_spann2'>
+                                                    {/* <i class='bx bxs-shopping-bag'></i> */}
+                                                    <img src={Carttrolly} alt='cart'/>
+                                                    <p>{props.Productlistlength.length}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                            </l1>
-                        </ul>
+                                </div>
+                                {/* <l1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</l1> */}
+                                <l1 style={{marginLeft: "15px"}}>
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAxhJREFUaEPtmE9SGkEUxr/HWNFdtOysg4uUsAqeIHoCzQmiK4dV8AR6A3UFZhM8QfAEkhPIjnElbOOkMKtolfBSLQxCD+N0D1NMSGaWVPfj/b73p/s1Yc4/mnP/kQIkHcFYI7BecbcB3iRQgUHLBC4MAFsAWgxuAFS/tsVFXOBTA+TKnSyoewhg18CpFoir968WTlt7K3cG+3xLpwLInd0eMlOJgOUoTjBwR4SSsy/Oo+yXeyIBZL92lhcfepcjKRL1/719VccWe1GMGAO8+/KjkOllLieqzmgTocbMNWCh5RRXZO5D7lngTJZ72AFhB8Br1VkGNR4WM1umKWUE0Fe+e+NzntEGcOQURVVHxVz59ghEJRVEQlzbqxs6Nrw12gBBaUPAxe9Fa9dUuX7xP9YAej/qMAGnTVtIOK1PGyBfcU8Y+DxmlXHuFIVJ9xnbLkVZenis+yAIH5v7oqZDoAUwaJU3cTrv2QqAaDm2WIsRwK2C8GlokNG+X7IKpmkT5JAscquXuVIE2tOpqdAI9BXqdqIY11HQW5MrKyIBWlEIBcifuTvM+DaqvlMUWRPndNZOTlNrzWvFQTZCAVRlTLuEjvPemnzFrTGwPWyRRAfN/dWTl2zoANRB+PAcAd5yim/qJo7prs2f/Swx8/FIj79o2kIefIFfOEDFld3nOWU4PKy6DqvrcuXbTRBdjqTrd6coNqcF4FEDji1CoaMCqA1DXvaubbEyNwDS0VzFNRIsVE1Tg1HVH7bTFECRcC4jIA8Vpu4xAXKmHTu0vCKeFixov/p7f5ZGg9g6mHSo+Wpg4PxV0JiYAMBTTjyNn2xtqBA+APU0VIsyKQDph5w91IPNB7BecTsvDelJAsh0Uq/Z/hRS2tjfFAHpi3qQpgBehEyvGAZdaCwJ0ggkXMRpDQwVmOFJ/P/VgHzu9r1dqt0mkQgw2uqDwr93lRg8bzSCopBgF/oFtgqhl7mnsa7cyRJ1T5hRAOHtpJl4ZinUf7JvMFslrev0tCPhrPeHzsSzdsj0/1IAU8XiXp9GIG5FTe2lETBVLO71fwA+tBlPunjydAAAAABJRU5ErkJggg==" />
+                                </l1>
+                                <l1 >
+                                    <p> <b>Call Us 24x7</b></p>
+                                    <p>〖 +966 59 099 1616 〗</p>
+
+                                </l1>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>
-
-
-            {/* <nav class="navbar navbar-expand-lg ">
-                <div class="container">
-                    <a class="navbar-brand" href="/"><img src={Logo} alt="logo" id="Logo_web" /></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/">{t("الرئيسية")}
-                                    <span class="sr-only">(current)</span>
-                                </Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/Components/Gallery">{t("اعمالنا")}</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/Components/About/About">{t("من نحن")}</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/Components/ContactUs">{t("تواصل معنا")}</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/Components/Product">{t("المنتجات")}</Link>
-                            </li>
-                            <div id='item'>
-
-                                <select class="navbar navbar-expand-lg navbar-dark bg-dark"
-                                    value={localStorage.getItem("i18nextLng")}
-                                    onChange={handleLanguageChange}
-                                    id='languagebtn'
-                                >
-                                    <option value="en" >English</option>
-                                    <option value="ar" >Arabic</option>
-                                </select>
+            {/* <section class="header-main border-bottom">
+                <div class="container-fluid">
+                    <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
+                        <div class="col-md-2" id="category_colunm">
+                            <div className='menu_spann'><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAFJJREFUSEtjZKAxYKSx+QyjFhAMYfoHkcaMN/8JOguPghsZIiiOxvABzS2gxPXY9NI/DmjuA5rHAc0toHkQDX0LaB4HNLdg6MfBqA/QQ4DmpSkAcbYYGW5ncyAAAAAASUVORK5CYII=" /></div>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Category
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Tile 1</a>
+                                    <a class="dropdown-item" href="#">Tile 2</a>
+                                    <a class="dropdown-item" href="#">All Tiles</a>
+                                </div>
                             </div>
-                            <l1>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="d-flex form-inputs">
+                                <input class="form-control" type="text" placeholder="Search ..." />
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAqBJREFUaEPtmU9y0zAUxr/nzIAtL8gRCnuGMLBvb0DZwJL0BE0XcAhYACcgLGFDeoL2AHQowx64AStLbmbQYxTiEhw7UmzLcWbirf6899P3nvRkEbb8oy33HzuATSvopIAQ4pCZj0E0ANCv4zQBYynlUZ05FsdaAWbOA5+aMmjmaRLCChBF0TmI9psEaBLCDiAEN+18Nl8TSmwUoAklNg5QF6ITAHUgOgNQFaJTAFUgOgewLkQnAdaB6CyAK0SnAQyEknKljzuAfJlBwHtNdN4DLpMkuTTtcRwPfgMDYj4E8Gid0qRNBU5Z61Gapj9XORiG4R4FwRtXkHYAmE+UUsYp5y+KohGIXtsG+Aeo4HzmtAuEb4BTJaWJ6/++KI6fg/kpgLvzhm8g+qCS5NVSXyEmq8LJKwBrfXsx5sMwvENB8BHAg5LQuGCtn6Rp+j1rn+fEj7JQ8gZgdhsp5XDRcCTE5xXOZ10vlJQPc+NKVfAGwERHaZKMr+P5b9i8tCXlrJ3oxWI4hXE8JOZ3RWO9AQRE97N93hh2XP1CFcw5oZm/tAqQX5lIiCsAN5wUAKZKypu5MCq8e3tToEmAfr/fv5pOf7WqQJMhFIbhAQXBWasAW5/EAJYOMcdEXt5Go+gMRAetKmCMNXGQrdqBjA1vSTxfrYmS8nGtUsJS1PkGAGoUcxm4EGLMwLPWQ+jaIPNIKfXW8Qwo7FYG4V+Bf+5MWOsT24VmFvNa7xcBF0G0CZChTJho0gO+mlLDHFJpmt5Dr7dHWg+z3absz3QeYhMAzpHkAtFpgFlhWvLklCnReQAbRP7OkZfX/l/I0xNTgSOVHv+sAD4e+cqSpMqTkxXAGJs/s46YaEDALecsrdBxXQgngAp+tDZkB9DaUpcY2noF/gCZabxAe/wFVgAAAABJRU5ErkJggg==" />
+                            </div>
+                        </div>
+                        <div class="col-md-2" id="cart_box_handle">
+                            <div class="d-flex d-none d-md-flex flex-row align-items-center">
                                 <Link to="/View/CartView">
                                     <div className="cart-icon">
-                                        <i class="fas fa-cart-plus fa-2x"></i>
-                                        <p>{props.Productlistlength.length}</p>
+                                        <div className='menu_spann2'>
+                                            <i class='bx bxs-shopping-bag'></i>
+                                            <p>{props.Productlistlength.length}</p>
+                                        </div>
                                     </div>
                                 </Link>
-                            </l1>
-                        </ul>
-
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-            </nav> */}
-
-        </React.Fragment>
+            </section> */}
+        </React.Fragment >
     )
 }
-
-
 const mapStateToprops = state => ({
     Productlistlength: state.Reducer.todoList,
 })

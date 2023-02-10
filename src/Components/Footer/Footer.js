@@ -8,8 +8,6 @@ const Footer = () => {
     const { t } = useTranslation(["sidebar"]);
     return (
         <React.Fragment>
-
-
             <div class="pg-footer">
                 <footer class="footer">
                     <svg class="footer-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
@@ -27,33 +25,6 @@ const Footer = () => {
                                 <h2 class="footer-menu-name"> انضم معنا</h2>
                             </div>
                         </div>
-                        {/* <div class="footer-content-column">
-                            <div class="footer-menu">
-                                <h2 class="footer-menu-name"> Company</h2>
-                                <ul id="menu-company" class="footer-menu-list">
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="#">Contact</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                        <a href="#">News</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="#">Careers</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="footer-menu">
-                                <h2 class="footer-menu-name"> Legal</h2>
-                                <ul id="menu-legal" class="footer-menu-list">
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-170434">
-                                        <a href="#">Privacy Notice</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="#">Terms of Use</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> */}
                         <div class="footer-content-column">
                             <div class="footer-menu">
                                 <div id="newsspec-19854-app" class="news-app-promo">
@@ -71,8 +42,8 @@ const Footer = () => {
 
                                             <a class="news-app-promo-subsection--link news-app-promo-subsection--appstore"
                                                 href="https://apps.apple.com/app/vip-mosaic-pools/id6443528459" target="blank">
-                                                <img class="news-app-promo__app-store" src="//news.files.bbci.co.uk/include/newsspec/19854/assets/app-project-assets/ios_app_store.svg" 
-                                                width="161" height="auto" border="0" />
+                                                <img class="news-app-promo__app-store" src="//news.files.bbci.co.uk/include/newsspec/19854/assets/app-project-assets/ios_app_store.svg"
+                                                    width="161" height="auto" border="0" />
                                             </a>
                                         </div>
                                     </div>
@@ -117,9 +88,7 @@ const Footer = () => {
                     </div>
                     <div class="footer-copyright">
                         <div class="footer-copyright-wrapper">
-                            <p class="footer-copyright-text">
-                                <a class="footer-copyright-link" href="https://sky-technet.com/" target="_self"> ©2020. | Designed By: <h5 style={{ color: "#FD6802" }}>SKY TECH</h5> | All rights reserved. </a>
-                            </p>
+                            <div class="footer">&copy;<span> {new Date().getFullYear()}</span><span> <b> 【VIP Mosiac Pools】</b>. Powerd by <b style={{ cursor: "pointer" }}><a style={{ color: "white" }} href="https://sky-technet.com/" target="_blank">【SKY TECH】</a></b>.</span></div>
                         </div>
                     </div>
                     <a href="https://api.whatsapp.com/send?phone=966557404034 &text=السلام عليكم"
@@ -129,81 +98,6 @@ const Footer = () => {
                     </a>
                 </footer>
             </div>
-
-
-
-
-            {/* <footer class="text-center" style={{ backgroundColor: "#6464ce", color: "white" }} >
-                <div class="container p-4">
-                    <section class="mb-4">
-                        <a class="btn btn-primary btn-floating m-1"
-                            style={{ backgroundColor: " #55acee" }} href="https://twitter.com/vip_mosaicpools?s=11&t=u-Lfg0RgX6i3NMzsdj-j0Q"
-                            role="button"><i class="fab fa-twitter"></i></a>
-
-                        <a class="btn btn-primary btn-floating m-1"
-                            style={{ backgroundColor: " #dd4b39" }} href="https://instagram.com/vip_mosaicpools?igshid=YmMyMTA2M2Y="
-                            role="button"><i class="fab fa-instagram"></i></a>
-
-                        <a class="btn btn-primary btn-floating m-1"
-                            style={{ backgroundColor: " #F1C514" }} href="https://www.snapchat.com/add/vip_mosaicpools?share_id=QzI4NDYw&locale=ar_SA@calendar=gregorian;numbers=latn"
-                            role="button"><i class="fab fa-snapchat"></i></a>
-
-                    </section>
-                    <section class="">
-                        <form action="">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-auto">
-                                    <p class="pt-2 text-white">
-                                        <strong>{t("Sign up for our newsletter")}</strong>
-                                    </p>
-                                </div>
-                                <div class="col-md-5 col-12">
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="email" id="form5Example2" class="form-control" />
-                                        <label class="form-label" for="form5Example2" style={{ margintop: '10px' }}>{t("Email address")}</label>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-outline-light mb-4">
-                                        {t("Subscribe")}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-                <div id="newsspec-19854-app" class="news-app-promo">
-                    <div class="news-app-promo-text">
-                        <div class="news-app-promo-text__tagline">The best way to get news on the go</div><br></br>
-                        <div class="news-app-promo-text__download">Download Our application</div><br></br>
-                    </div>
-                    <div class="news-app-promo__section">
-                        <div class="news-app-promo-subsection">
-                            <a class="news-app-promo-subsection--link news-app-promo-subsection--playstore" href="https://play.google.com/store/apps/details?id=bbc.mobile.news.ww&amp;hl=en" target="_parent">
-                                <img class="news-app-promo__play-store" src="//news.files.bbci.co.uk/include/newsspec/19854/assets/app-project-assets/google_play_store.svg" width="161" height="auto" border="0" />
-                            </a>
-                            <a class="news-app-promo-subsection--link news-app-promo-subsection--appstore" href="https://itunes.apple.com/us/app/bbc-news/id364147881?mt=8" target="_parent">
-                                <img class="news-app-promo__app-store" src="//news.files.bbci.co.uk/include/newsspec/19854/assets/app-project-assets/ios_app_store.svg" width="161" height="auto" border="0" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="news-app-promo__section">
-
-                    </div>
-                </div>
-                <div class="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
-                    © {t("2022 Copyright")}:
-                    <a class="text-white" href="https://sky-technet.com/"> <LabelText text={t("Vip Mosaic Pool Tiles")} color={"white"} /></a>
-                    <h4>Designed By</h4>
-                    <a class="text-white" href="https://sky-technet.com/"><h4 style={{ color: "#FD6802" }}> Sky Tech</h4></a>
-                </div>
-                <div>
-                    <a href="https://api.whatsapp.com/send?phone=966557404034 &text=السلام عليكم" class="whatsapp-button" target="_blank"
-                        style={{ position: "fixed", right: "15px", bottom: "100px", zindex: "1000" }}>
-                        <img src="https://i.ibb.co/VgSspjY/whatsapp-button.png" alt="botão whatsapp" />
-                    </a>
-                </div>
-            </footer> */}
         </React.Fragment>
     )
 }

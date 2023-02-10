@@ -24,10 +24,11 @@ a{
 .avatar{
   object-fit: cover;
 }
-#model{
-  width: 140% !important;
-}
+/* #model{
+  width: auto !important;
+} */
 #Noproducts{
 width: 100%;
 text-align: center;
 }
+

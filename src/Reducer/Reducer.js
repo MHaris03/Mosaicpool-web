@@ -3,7 +3,9 @@ const state = {
     todoList: [],
     quantity1: 0,
     id: 0,
-    totalprice: 0
+    totalprice: 0,
+    DeleteData: 0,
+    ClearData:0,
 }
 const todoList = (mstate = { ...state }, action) => {
     switch (action.type) {
@@ -20,7 +22,7 @@ const todoList = (mstate = { ...state }, action) => {
             return deepCopy(mstate);
         case DeleteData:
             if (action.payload === null || action.payload === undefined) {
-                alert("There is no data in paaayload")
+                alert("There is no data in payload")
             }
             else {
                 mstate.todoList = mstate.todoList.filter(ls => ls.productid !== action.payload)
@@ -31,8 +33,7 @@ const todoList = (mstate = { ...state }, action) => {
                 alert("There is no data in payload")
             }
             else {
-                const newlist = [];
-                mstate.todoList = newlist;
+                mstate.todoList = action.payload
             }
             return deepCopy(mstate);
         case IncrimentData:

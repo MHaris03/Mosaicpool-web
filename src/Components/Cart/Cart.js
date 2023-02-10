@@ -13,18 +13,21 @@ import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
     const { t } = useTranslation(["sidebar"]);
-    const [totalprice, settotalprice] = useState();
+    const [totalprice, settotalprice] = useState(0);
     const [state, setstate] = useState(false);
-
+    
+    const EmptyProductData = []
+    const CartArray = []
+    var QuantityPrice = 0;
     useEffect(() => {
-        var Price = 0;
-        props.Productlist.map(ls => (
-            Price = Price + (ls.Price * ls.item)
+        props.Productlist.map(ls => {
+            QuantityPrice = QuantityPrice + (ls.Price * ls.item)
+            CartArray.push(ls)
 
-        ))
-
-        settotalprice(Price)
-        props.GetTotalprice(Price)
+        })
+        // console.log(CartArray, "this is use effect")
+        settotalprice(QuantityPrice)
+        props.GetTotalprice(QuantityPrice)
 
     }, [state])
 
@@ -66,6 +69,7 @@ const Cart = (props) => {
 
         localStorage.setItem("productlist", JSON.stringify(productlist))
     }
+    // console.log(props.EmptyProduct, "this reducer data...")
     return (
         <React.Fragment>
             <div className="container">
@@ -113,11 +117,15 @@ const Cart = (props) => {
                                                     </div>
 
                                                     <div className="remove-item"
+
                                                         onClick={() => {
 
-                                                            props.DeleteDataFunction(ls.productid)
+                                                            props.DeleteDataFunction(ls.productid);
+                                                            let newPrice = ls.Price * ls.item
+                                                            settotalprice(totalprice - newPrice)
                                                         }}
                                                     >
+                                                        {/* {console.log(ls.Price * ls.item, "sihaifhspihfpsihfpihd")} */}
                                                         <i
                                                             className="fas fa-trash-alt remove"
                                                         ></i>
@@ -142,7 +150,10 @@ const Cart = (props) => {
                                 }{t("SAR")}.
                             </span>
                         </h3>
-                        <button className="clear-cart" onClick={props.ClearDataFunction}>
+                        <button className="clear-cart" onClick={() => {
+                            props.ClearDataFunction(EmptyProductData);
+                            settotalprice(0);
+                        }}>
                             {t("Clear Cart")}
                         </button>
                         <br />
@@ -164,7 +175,8 @@ const Cart = (props) => {
 
 
 const mapStateToprops = state => ({
-    Productlist: state.Reducer.todoList
+    Productlist: state.Reducer.todoList,
+    EmptyProduct: state.Reducer.todoList
 
 })
 export default connect(mapStateToprops, {
