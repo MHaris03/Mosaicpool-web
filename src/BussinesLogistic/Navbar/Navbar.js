@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom';
 import Logo from '../../Images/mosaic pool-05.png';
 import './navbar.css';
 import Carttrolly from "../../Images/cartrrolley.svg"
+import Twittericn from "../../Images/twtr.svg"
+import Instagram from "../../Images/instagram.svg"
+import Snapchat from "../../Images/snapchat.svg"
+
 const Navbar = (props) => {
     const { i18n, t } = useTranslation(["sidebar"]);
 
@@ -32,13 +36,16 @@ const Navbar = (props) => {
                 <div class="col-md-6 text-center text-sm-right">
                     <div class="d-inline-flex align-items-center">
                         <a class="text-white px-3" href="https://www.snapchat.com/add/vip_mosaicpools?share_id=QzI4NDYw&locale=ar_SA@calendar=gregorian;numbers=latn" target="_blank">
-                            <i class="fab fa-snapchat"></i>
+                            {/* <i class="fab fa-snapchat"></i> */}
+                            <img src={Snapchat}/>
                         </a>
                         <a class="text-white px-3" href="https://twitter.com/vip_mosaicpools?s=11&t=u-Lfg0RgX6i3NMzsdj-j0Q" target="_blank">
-                            <i class="fab fa-twitter"></i>
+                            {/* <i class="fab fa-twitter"></i> */}
+                            <img src={Twittericn}/>
                         </a>
                         <a class="text-white px-3" href="https://www.instagram.com/vip_mosaicpools/?igshid=YmMyMTA2M2Y%3D" target="_blank">
-                            <i class="fab fa-instagram"></i>
+                            {/* <i class="fab fa-instagram"></i> */}
+                            <img src={Instagram}/>
                         </a>
                     </div>
                 </div>
@@ -67,7 +74,7 @@ const Navbar = (props) => {
                                         <span class="sr-only">(current)</span>
                                     </Link>
                                 </li>
-                                <div class="col-md-2">
+                                <div class="col-md-2" >
                                     <div class="d-flex d-none d-md-flex flex-row align-items-center">
                                         <Link to="/View/CartView">
                                             <div className="cart-icon">

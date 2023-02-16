@@ -7,7 +7,7 @@ import { collection, addDoc } from "firebase/firestore";
 import Master from '../../Images/master.svg';
 import America from "../../Images/emericancard.png"
 import Mada from "../../Images/madacard.png"
-
+import { useLocation } from 'react-router-dom';
 import './card.css';
 const Card = () => {
     const { t } = useTranslation(["sidebar"]);
@@ -25,7 +25,7 @@ const Card = () => {
     const [Shipped, setShipped] = useState(false);
     const Invoiceid = Math.floor(Math.random() * 100000000 );
     const productlist = JSON.parse(localStorage.getItem('productlist'))
-
+    const location = useLocation();
     useEffect(() => {
         setDate(localStorage.getItem("Date"))
         setAddress(localStorage.getItem("Address"))
@@ -50,7 +50,7 @@ const Card = () => {
         // formdata.append("callback_url", "http://localhost:3000/ConfirmOrder");
         formdata.append("amount", 100 * productlist.totalprice);
         formdata.append("currency", "SAR");
-        formdata.append("description", productlist.item);
+        // formdata.append("description", productlist.item);
         formdata.append("source[type]", "creditcard");
         formdata.append("source[name]", name);
         formdata.append("source[number]", number);
@@ -71,22 +71,23 @@ const Card = () => {
             .then(result => {
                 if (result.type === "invalid_request_error") {
                     alert(result.message)
-                    {console.log(result,"Invalid")}
+                    // {console.log(result,"Invalid")}
                 }
                 else {
                     window.open(result.source.transaction_url, "_blank")
                     const docRef = addDoc(collection(db, "Weborder"), {
-                        ProductName: productlist.name,
+                        // ProductName: productlist.name,
                         ProductPrice: productlist.totalprice,
                         UserName: name,
-                        productid: Invoiceid,
-                        TilesMeters: productlist.item,
+                        Orderid: Invoiceid,
+                        // TilesMeters: productlist.item,
                         Date: Date,
                         Address: Address,
                         State: State,
                         Email: Email,
                         Phonenumber: Phonenumber,
                         Shipped:Shipped,
+                        productinfo:location.state,
 
                     });
                     localStorage.setItem("Invoiceid", JSON.stringify(Invoiceid))

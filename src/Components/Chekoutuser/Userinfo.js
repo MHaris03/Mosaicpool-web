@@ -3,6 +3,7 @@ import Navbar from '../../BussinesLogistic/Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { useTranslation } from 'react-i18next'
 import { Link, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './userinfo.css';
 const Userinfo = () => {
     const { t } = useTranslation(["sidebar"]);
@@ -14,6 +15,9 @@ const Userinfo = () => {
     const [Date, setDate] = useState('');
     const [City, setCity] = useState('');
     const [CustomerName, setCustomerName] = useState('');
+    const location = useLocation();
+    // location.state;
+    // {console.log(location.state,"props first")}
     const history = useHistory()
     const userinfoconfirm = (e) => {
         e.preventDefault()
@@ -40,8 +44,11 @@ const Userinfo = () => {
             localStorage.setItem("City", City);
             localStorage.setItem("Customername", CustomerName);
             localStorage.setItem("Phone", Phonenumber);
-            history.push ("/Components/card/card");
-
+            // history.push ("/Components/card/card");
+            history.push({
+                pathname: '/Components/card/card',
+                state: location.state,
+              });
         }
         setUserName('')
         setState('')
@@ -55,6 +62,7 @@ const Userinfo = () => {
     return (
         <React.Fragment>
             <Navbar />
+            {/* {console.log(props,"product array")} */}
             <form class="card">
                 <div class="containeer">
                     <div class="card-title">

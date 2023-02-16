@@ -105,9 +105,9 @@
     align-items:center;
     justify-content:center;
 }
-.container-fluid{
+/* .container-fluid{
     margin-left: -5px;
-}
+} */
 
 .qty{
     font-size:12px;
