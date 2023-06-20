@@ -8,6 +8,7 @@ import { onSnapshot, collection, query, } from "firebase/firestore";
 import db from "../../db"
 import Carousel from 'react-bootstrap/Carousel';
 import LoadingSpin from "react-loading-spin";
+import { Toaster, toast } from 'react-hot-toast';
 import './product.css';
 const Products = (props) => {
     const { t } = useTranslation(["sidebar"]);
@@ -19,6 +20,8 @@ const Products = (props) => {
     const [mdlname, setmdlname] = useState()
     const [multipleimg, setmultipleimg] = useState([])
     const [searched, setSearched] = useState([]);
+    const [search, setSearch] = useState([]);
+
     const [Array, setArray] = React.useState([]);
 
     const requestSearch = (text) => {
@@ -62,7 +65,7 @@ const Products = (props) => {
         }
 
         fetchUserAPI();
-    }, [searched]);
+    }, []);
     const handleClick = (event) => {
         setImagemdl(event.Image)
         setDescrimdl(event.descriptions)
@@ -76,10 +79,11 @@ const Products = (props) => {
         const index = props.Productlist2.findIndex(ls => ls.productid === Array.productid)
 
         if (index >= 0) {
-            alert('You have already added this product')
+            toast.error('You have already added this product')
         }
         else {
             props.AddDataFunction(Array)
+            toast.success('Add Success')
         }
     }
     return (
@@ -94,7 +98,7 @@ const Products = (props) => {
                     :
                     <React.Fragment>
                         <div class="latest-products">
-
+                            {/* 
                             <div class="row height d-flex justify-content-center align-items-center">
 
                                 <div class="col-md-6">
@@ -103,6 +107,18 @@ const Products = (props) => {
                                         <input class="form-control" type="text" placeholder="Search By Tiles Name..."
                                             onChange={(searchVal) => requestSearch(searchVal)}
                                             onhandleChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                            </div> */}
+
+                            <div class="row height d-flex justify-content-center align-items-center">
+
+                                <div class="col-md-6">
+
+                                    <div class="form">
+                                        <input class="form-control" type="text" placeholder="Search By Tiles Name..."
+                                            onChange={(e) => setSearch(e.target.value)}
                                         />
                                     </div>
                                 </div>
@@ -120,7 +136,10 @@ const Products = (props) => {
                                     <br />
                                     {productlist.length == 0 && <h3 id='Noproducts'>لا توجد منتجات متاحة</h3>}
 
-                                    {productlist.map(ls => (
+                                    {productlist.filter((ls) => {
+                                        return search.toString().toLowerCase() === ''
+                                            ? ls : ls.name.toLowerCase().includes(search);
+                                    }).map(ls => (
                                         <div class="col-md-4" key={ls.id}>
                                             <div class="product-item">
                                                 <img src={ls.Image} id="Product__image__setting"
@@ -229,6 +248,7 @@ const Products = (props) => {
                                 </div>
                             </div>
                         </div>
+                        <Toaster />
                     </React.Fragment>
             }
         </div>

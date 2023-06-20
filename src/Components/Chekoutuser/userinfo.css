@@ -26,14 +26,14 @@ button {
 	margin-bottom: 8px;
 }
 
-.user__inpt{
+.user__inpt {
 	padding: 12px;
 	border-radius: 6px;
 	border: 2px solid #e8ebed;
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
-} 
+}
 
 .placeholder {
 	color: #e8ebed !important;
@@ -58,7 +58,7 @@ button {
 	border-radius: 6px;
 	box-sizing: border-box;
 	box-shadow: 0px 24px 60px -1px rgba(37, 44, 54, 0.14);
-	
+
 }
 
 h2 {
@@ -85,9 +85,11 @@ h4 {
 	text-align: center;
 	transition: all .5s ease;
 }
+
 p {
 	color: #28333b;
 }
+
 p {
 	margin-bottom: 0;
 	font-size: 10px;
@@ -132,7 +134,7 @@ button {
 	transition: all .5s ease;
 	background: transparent;
 	border: 2px solid transparent;
-	
+
 }
 
 .button-primary {
@@ -145,16 +147,23 @@ button {
 	border-color: #e8ebed;
 	color: #8a959c;
 }
-.errormessage{
-    font-size: 12px;
-    color: red;
+
+.errormessage {
+	font-size: 12px;
+	color: red;
 }
+
 /* @media (max-width: 768px) {
     .containeer{
         max-height: 2960px;
     }
 } */
-.containeer{
+.containeer {
 	min-width: 300px;
-	
+
+}
+
+button.abled {
+	background-color: #40b3ff;
+	color: white;
 }

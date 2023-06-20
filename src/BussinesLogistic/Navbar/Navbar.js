@@ -10,9 +10,12 @@ import Carttrolly from "../../Images/cartrrolley.svg"
 import Twittericn from "../../Images/twtr.svg"
 import Instagram from "../../Images/instagram.svg"
 import Snapchat from "../../Images/snapchat.svg"
+import db from "../../db"
+import { onSnapshot, collection, query, where, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 const Navbar = (props) => {
     const { i18n, t } = useTranslation(["sidebar"]);
+    const [Text, setText] = React.useState([])
 
     useEffect(() => {
         if (localStorage.getItem("i18nextLng")) {
@@ -23,32 +26,43 @@ const Navbar = (props) => {
     const handleLanguageChange = (e) => {
         i18n.changeLanguage(e.target.value);
     };
+    useEffect(() => {
+        const q = query(collection(db, "Webnav"))
+        const unsub = onSnapshot(q, (querySnapshot) => {
+            setText(querySnapshot.docs.map(d => d.data()))
+        });
+    }, [])
     return (
         <React.Fragment>
             <div className='container-fluid top__bar'>
-                <div class="col-md-6 .offset-md-6 text-center text-sm-left mb-1 mb-lg-0">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-white px-3" href="">+966 55 740 4034</a>
-                        <span class="text-white" id="mobilesettings">|</span>
-                        <a class="text-white pl-3" href="" id="mobilesettings">Save Up To 40% on First Buy !!</a>
-                    </div>
-                </div>
-                <div class="col-md-6 text-center text-sm-right">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-white px-3" href="https://www.snapchat.com/add/vip_mosaicpools?share_id=QzI4NDYw&locale=ar_SA@calendar=gregorian;numbers=latn" target="_blank">
-                            {/* <i class="fab fa-snapchat"></i> */}
-                            <img src={Snapchat}/>
-                        </a>
-                        <a class="text-white px-3" href="https://twitter.com/vip_mosaicpools?s=11&t=u-Lfg0RgX6i3NMzsdj-j0Q" target="_blank">
-                            {/* <i class="fab fa-twitter"></i> */}
-                            <img src={Twittericn}/>
-                        </a>
-                        <a class="text-white px-3" href="https://www.instagram.com/vip_mosaicpools/?igshid=YmMyMTA2M2Y%3D" target="_blank">
-                            {/* <i class="fab fa-instagram"></i> */}
-                            <img src={Instagram}/>
-                        </a>
-                    </div>
-                </div>
+                {Text.map((data) => (
+                    <>
+                        <div class="col-md-6 .offset-md-6 text-center text-sm-left mb-1 mb-lg-0">
+
+                            <div class="d-inline-flex align-items-center">
+                                <a class="text-white px-3" href="">{data.PhoneNumber}</a>
+                                <span class="text-white" id="mobilesettings">|</span>
+                                <a class="text-white pl-3" href="" id="mobilesettings">{data.Discount}</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center text-sm-right">
+                            <div class="d-inline-flex align-items-center">
+                                <a class="text-white px-3" href={data.Snapchatlink} target="_blank">
+                                    {/* <i class="fab fa-snapchat"></i> */}
+                                    <img src={Snapchat} />
+                                </a>
+                                <a class="text-white px-3" href={data.Twitterlink} target="_blank">
+                                    {/* <i class="fab fa-twitter"></i> */}
+                                    <img src={Twittericn} />
+                                </a>
+                                <a class="text-white px-3" href={data.Instagramlink} target="_blank">
+                                    {/* <i class="fab fa-instagram"></i> */}
+                                    <img src={Instagram} />
+                                </a>
+                            </div>
+                        </div>
+                    </>
+                ))}
             </div>
             <nav class="navbar navbar-expand-lg py-0" >
                 <div class="container-fluid">
@@ -80,7 +94,7 @@ const Navbar = (props) => {
                                             <div className="cart-icon">
                                                 <div className='menu_spann2'>
                                                     {/* <i class='bx bxs-shopping-bag'></i> */}
-                                                    <img src={Carttrolly} alt='cart'/>
+                                                    <img src={Carttrolly} alt='cart' />
                                                     <p>{props.Productlistlength.length}</p>
                                                 </div>
                                             </div>
@@ -88,7 +102,7 @@ const Navbar = (props) => {
                                     </div>
                                 </div>
                                 {/* <l1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</l1> */}
-                                <l1 style={{marginLeft: "15px"}}>
+                                <l1 style={{ marginLeft: "15px" }}>
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAxhJREFUaEPtmE9SGkEUxr/HWNFdtOysg4uUsAqeIHoCzQmiK4dV8AR6A3UFZhM8QfAEkhPIjnElbOOkMKtolfBSLQxCD+N0D1NMSGaWVPfj/b73p/s1Yc4/mnP/kQIkHcFYI7BecbcB3iRQgUHLBC4MAFsAWgxuAFS/tsVFXOBTA+TKnSyoewhg18CpFoir968WTlt7K3cG+3xLpwLInd0eMlOJgOUoTjBwR4SSsy/Oo+yXeyIBZL92lhcfepcjKRL1/719VccWe1GMGAO8+/KjkOllLieqzmgTocbMNWCh5RRXZO5D7lngTJZ72AFhB8Br1VkGNR4WM1umKWUE0Fe+e+NzntEGcOQURVVHxVz59ghEJRVEQlzbqxs6Nrw12gBBaUPAxe9Fa9dUuX7xP9YAej/qMAGnTVtIOK1PGyBfcU8Y+DxmlXHuFIVJ9xnbLkVZenis+yAIH5v7oqZDoAUwaJU3cTrv2QqAaDm2WIsRwK2C8GlokNG+X7IKpmkT5JAscquXuVIE2tOpqdAI9BXqdqIY11HQW5MrKyIBWlEIBcifuTvM+DaqvlMUWRPndNZOTlNrzWvFQTZCAVRlTLuEjvPemnzFrTGwPWyRRAfN/dWTl2zoANRB+PAcAd5yim/qJo7prs2f/Swx8/FIj79o2kIefIFfOEDFld3nOWU4PKy6DqvrcuXbTRBdjqTrd6coNqcF4FEDji1CoaMCqA1DXvaubbEyNwDS0VzFNRIsVE1Tg1HVH7bTFECRcC4jIA8Vpu4xAXKmHTu0vCKeFixov/p7f5ZGg9g6mHSo+Wpg4PxV0JiYAMBTTjyNn2xtqBA+APU0VIsyKQDph5w91IPNB7BecTsvDelJAsh0Uq/Z/hRS2tjfFAHpi3qQpgBehEyvGAZdaCwJ0ggkXMRpDQwVmOFJ/P/VgHzu9r1dqt0mkQgw2uqDwr93lRg8bzSCopBgF/oFtgqhl7mnsa7cyRJ1T5hRAOHtpJl4ZinUf7JvMFslrev0tCPhrPeHzsSzdsj0/1IAU8XiXp9GIG5FTe2lETBVLO71fwA+tBlPunjydAAAAABJRU5ErkJggg==" />
                                 </l1>
                                 <l1 >

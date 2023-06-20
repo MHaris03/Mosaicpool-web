@@ -3,7 +3,10 @@ form{
 }
   
 #card__name{
- margin-left: -220px;
+ margin-right: 230px;
+}
+#cardinfo{
+	margin-right: 215px;
 }
 .cardnumber{
 	border-radius: 7px;
@@ -12,7 +15,7 @@ form{
 	width: 347px;
 }
 .pay__btn{
-    outline: none;
+    outline: none !important;
     border: none;
     justify-content: center;
     letter-spacing: .5px;
@@ -69,6 +72,9 @@ form{
     margin-left: -63px;
 	
 }
+.card-icon {
+    display: flex;
+  }
 /* input[type=text]:focus {
 	border: 1px solid skyblue;
 	

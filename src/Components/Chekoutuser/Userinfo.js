@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../BussinesLogistic/Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { useTranslation } from 'react-i18next'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
 import './userinfo.css';
 const Userinfo = () => {
     const { t } = useTranslation(["sidebar"]);
@@ -30,12 +31,12 @@ const Userinfo = () => {
             CustomerName === "" &&
             Phonenumber === ""
         ) {
-            alert("Please enter the all details")
+            toast.error("Please enter the all details")
             return
 
         }
         else {
-            
+
             localStorage.setItem("User", UserName);
             localStorage.setItem("State", state);
             localStorage.setItem("Date", Date);
@@ -44,11 +45,10 @@ const Userinfo = () => {
             localStorage.setItem("City", City);
             localStorage.setItem("Customername", CustomerName);
             localStorage.setItem("Phone", Phonenumber);
-            // history.push ("/Components/card/card");
+            localStorage.setItem("cartinfo", JSON.stringify(location.state));
             history.push({
                 pathname: '/Components/card/card',
-                state: location.state,
-              });
+            });
         }
         setUserName('')
         setState('')
@@ -59,10 +59,11 @@ const Userinfo = () => {
         setCustomerName('')
 
     }
+    const isSubmitDisabled = !UserName || !Address || !Date || !City || !Phonenumber || !CustomerName
+        || !Email || !state;
     return (
         <React.Fragment>
             <Navbar />
-            {/* {console.log(props,"product array")} */}
             <form class="card">
                 <div class="containeer">
                     <div class="card-title">
@@ -71,10 +72,6 @@ const Userinfo = () => {
                     <div class="card-body">
                         <div class="payment-info flex justify-space-between">
                             <div class="column billing">
-                                {/* <div class="title">
-                                    <div class="num">1</div>
-                                    <h4>{t("Billing Info")}</h4>
-                                </div> */}
                                 <div class="field full">
                                     <label for="name" className='user__label'>{t("اسم")}</label>
                                     <input id="name" type="text" className='user__inpt' placeholder={t("اسم")}
@@ -106,18 +103,8 @@ const Userinfo = () => {
                                     </div>
 
                                 </div>
-                                {/* <div class="field full">
-                                    <label for="zip">{t("Zip")}</label>
-                                    <input id="zip" type="text" placeholder={t("Zip")}
-                                        onChange={event => setZip(event.target.value)}
-                                    />
-                                </div> */}
                             </div>
                             <div class="column shipping">
-                                {/* <div class="title">
-                                    <div class="num">2</div>
-                                    <h4>{t("Credit Card Info")}</h4>
-                                </div> */}
                                 <div class="field full">
                                     <label for="name" className='user__label'>{t("الاسم الكامل")}</label>
                                     <input id="name" type="text" className='user__inpt' placeholder={t("الاسم الكامل")}
@@ -127,7 +114,7 @@ const Userinfo = () => {
                                 </div>
                                 <div class="field full">
                                     <label for="address" className='user__label'>{t("رقم الهاتف")}</label>
-                                    <input id="address" type="text" className='user__inpt' placeholder="966-12345-2345"
+                                    <input id="address" type="tel" inputMode="tel" pattern="[0-9]*" className='user__inpt' placeholder="966-12345-2345"
                                         onChange={event => setNumber(event.target.value)}
                                         value={Phonenumber} maxLength='12' required
                                     />
@@ -147,39 +134,20 @@ const Userinfo = () => {
                                         required
                                     />
                                 </div>
-                                <div class="flex justify-space-between">
-                                    {/* <div class="field half">
-                                        <label for="city">{t("Exp. Month")}</label>
-                                        <input id="city" type="text" placeholder="12"
-                                            onChange={event => setmonth(event.target.value)}
-                                        />
-                                    </div> */}
-                                    {/* <div class="field half">
-                                        <label for="state">{t("Exp. Year")}</label>
-                                        <input id="state" type="text" placeholder="2021"
-                                            onChange={event => setyear(event.target.value)}
-                                        />
-                                    </div> */}
-                                </div>
-                                {/* <div class="field full">
-                                    <label for="zip">{t("CVC Number")}</label>
-                                    <input id="zip" type="text" placeholder="468"
-                                        onChange={event => setcvc(event.target.value)}
-                                    />
-                                </div> */}
                             </div>
                         </div>
                     </div>
                     <div class="card-actions flex justify-space-between">
                         <div class="flex-end">
-                            <button class="button button-primary" onClick={userinfoconfirm} type='submit'>{t("استمر")}</button>
+                            <button class="button button-primary" disabled={isSubmitDisabled} className={isSubmitDisabled ? 'disabled' : 'abled'}
+                                onClick={userinfoconfirm} type='submit'>{t("استمر")}</button>
                         </div>
                     </div>
                 </div>
             </form>
 
 
-
+            <Toaster />
             <Footer />
         </React.Fragment>
     )
